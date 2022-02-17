@@ -1,7 +1,25 @@
-export const getSquaredArray = (array) => {
-  return array.map((num) => num * num);
+export const calc = (expression) => {
+  if (typeof expression !== "string") {
+    return null;
+  }
+
+  const [a, operation, b] = expression.split(" ");
+  let result;
+
+  switch (operation) {
+    case "+":
+      result = +a + +b;
+      break;
+    case "-":
+      result = +a - +b;
+      break;
+    case "*":
+      result = +a * +b;
+      break;
+    case "/":
+      result = +a / +b;
+      break;
+  }
+
+  return `${expression} = ${result}`;
 };
-export const getOddNumbers = (array) => {
-  return array.filter((num) => num % 2 === 1);
-};
-export default (a, b) => a + b;

@@ -1,16 +1,26 @@
-import getSum, { getSquaredArray, getOddNumbers } from "./calculator.js";
+import { calc } from "./calculator.js";
 
-it("should keep only odd numbers from array", () => {
-  const result = getOddNumbers([1, 2, 3, 4]);
-  expect(result).toEqual([1, 3]);
+it("Additional operation", () => {
+  const result = calc("1 + 2");
+  expect(result).toEqual("1 + 2 = 3");
 });
 
-it("should get squared numbers", () => {
-  const result = getSquaredArray([1, 2, 3]);
-  expect(result).toEqual([1, 4, 9]);
+it("subtraction operation", () => {
+  const result = calc("10 - 2");
+  expect(result).toEqual("10 - 2 = 8");
 });
 
-it("should get sum of numbers", () => {
-  const result = getSum(1, 3);
-  expect(result).toEqual(4);
+it("Multiplication operation", () => {
+  const result = calc("2 * 3");
+  expect(result).toEqual("2 * 3 = 6");
+});
+
+it("Division operation", () => {
+  const result = calc("10 / 2");
+  expect(result).toEqual("10 / 2 = 5");
+});
+
+it("check if argument is string", () => {
+  const result = calc(19);
+  expect(result).toEqual(null);
 });
