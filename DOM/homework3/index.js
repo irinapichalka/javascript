@@ -8,9 +8,9 @@ export function getDescription() {
 }
 export function getPlans() {
   const inputElem = document.querySelector(".plans");
-  return inputElem.innerText;
+  return inputElem.innerHTML;
 }
 export function getGoal() {
   const inputElem = document.querySelector(".goal");
-  return inputElem.outerText;
+  return inputElem.outerHTML;
 }
