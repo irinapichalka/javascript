@@ -8,13 +8,9 @@ function getDescription() {
 }
 function getPlans() {
   const inputElem = document.querySelector(".plans");
-  return inputElem.innerText;
+  return inputElem.innerHTML;
 }
 function getGoal() {
   const inputElem = document.querySelector(".goal");
-  return inputElem.outerText;
+  return inputElem.outerHTML;
 }
-getTitle();
-getDescription();
-getPlans();
-getGoal();
