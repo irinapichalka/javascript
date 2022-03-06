@@ -1,16 +1,16 @@
-export function getTitle() {
+function getTitle() {
   const titleElem = document.querySelector(".title");
   return titleElem.textContent;
 }
-export function getDescription() {
+function getDescription() {
   const inputElem = document.querySelector(".about");
   return inputElem.innerText;
 }
-export function getPlans() {
+function getPlans() {
   const inputElem = document.querySelector(".plans");
   return inputElem.innerText;
 }
-export function getGoal() {
+function getGoal() {
   const inputElem = document.querySelector(".goal");
   return inputElem.outerText;
 }
