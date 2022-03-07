@@ -15,20 +15,47 @@ const logGreyDiv = logTarget.bind(null, "DIV", "grey");
 const logGreyP = logTarget.bind(null, "P", "grey");
 const logGreySpan = logTarget.bind(null, "SPAN", "grey");
 
-divElem.addEventListener("click", logGreyDiv, true);
-divElem.addEventListener("click", logGreenDiv);
-
-pElem.addEventListener("click", logGreyP, true);
-pElem.addEventListener("click", logGreenP);
-
-spanElem.addEventListener("click", logGreySpan, true);
-spanElem.addEventListener("click", logGreenSpan);
-
 const clearEventsList = () => {
-  const eventsListElem = document.querySelectorAll(".events-list");
+  const eventsListElem = document.querySelector(".events-list");
   eventsListElem.innerHTML = "";
   //eventsListElem.parentNode.removeChild(eventsListElem);
 };
 
 const btnClear = document.querySelector(".clear-btn");
 btnClear.addEventListener("click", clearEventsList);
+
+const btnAttach = document.querySelector(".attach-handlers-btn");
+btnAttach.addEventListener("click", () => {
+  divElem.addEventListener("click", logGreyDiv, true);
+  divElem.addEventListener("click", logGreenDiv);
+
+  pElem.addEventListener("click", logGreyP, true);
+  pElem.addEventListener("click", logGreenP);
+
+  spanElem.addEventListener("click", logGreySpan, true);
+  spanElem.addEventListener("click", logGreenSpan);
+});
+
+const btnRemove = document.querySelector(".remove-handlers-btn");
+btnRemove.addEventListener("click", () => {
+  divElem.removeEventListener("click", logGreyDiv);
+  divElem.removeEventListener("click", logGreenDiv);
+
+  pElem.removeEventListener("click", logGreyP);
+  pElem.removeEventListener("click", logGreenP);
+
+  spanElem.removeEventListener("click", logGreySpan, true);
+  spanElem.removeEventListener("click", logGreenSpan);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  //btnAttach.onClick();
+  divElem.addEventListener("click", logGreyDiv, true);
+  divElem.addEventListener("click", logGreenDiv);
+
+  pElem.addEventListener("click", logGreyP, true);
+  pElem.addEventListener("click", logGreenP);
+
+  spanElem.addEventListener("click", logGreySpan, true);
+  spanElem.addEventListener("click", logGreenSpan);
+});
