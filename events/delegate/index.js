@@ -1,17 +1,52 @@
-const arenaElem = document.querySelectorAll(".arena");
+const arenaElem = document.querySelector(".arena");
 
-const sectorElems = document.querySelectorAll(".sector");
-const lineElems = document.querySelectorAll(".sector__line");
-const seatElems = document.querySelectorAll(".sector__seat");
+const generateNumbersRange = (from, to) => {
+  const result = [];
+  for (let i = from; i <= to; i++) {
+    result.push(i);
+  }
+  return result;
+};
 
-const showSelectedSeat = (sector, line, seat) => {
+const getLineSeats = () => {
+  return generateNumbersRange(1, 10)
+    .map(
+      (seatNumber) =>
+        `<div class="sector__seat" data-seat-number="${seatNumber}"></div>`
+    )
+    .join("");
+};
+
+const getSectorLines = () => {
+  const seatsString = getLineSeats();
+  return generateNumbersRange(1, 10)
+    .map(
+      (lineNumber) =>
+        `<div class="sector__line" data-line-number="${lineNumber}">${seatsString}</div>`
+    )
+    .join("");
+};
+const renderArena = () => {
+  const linesString = getSectorLines();
+  const sectorsString = generateNumbersRange(1, 3)
+    .map(
+      (sectorNumber) =>
+        `<div class="sector" data-sector-number="${sectorNumber}">${linesString}</div>`
+    )
+    .join("");
+  arenaElem.innerHTML = sectorsString;
+};
+
+const onSeatSelect = (event) => {
+  const isSeat = event.target.classList.contains("sector__seat");
+  if (!isSeat) return;
+
+  const seatNumber = event.target.dataset.seatNumber;
+  const lineNumber = event.target.closest(".sector__line").dataset.lineNumber;
+  const sectorNumber = event.target.closest(".sector").dataset.sectorNumber;
+
   const selectedSeatElem = document.querySelector(".board__selected-seat");
-  selectedSeatElem.innerHTML = `<span>S${sector} - L${line} - S${seat}</span>`;
+  selectedSeatElem.textContent = `S ${sectorNumber} - L ${lineNumber} - S ${seatNumber}`;
 };
-
-const onSectorClicked = (event) => {
-  console.log(event.target.index); ////???????????????????????
-};
-[...sectorElems].forEach((sector, index) => {
-  sector.addEventListener("click", onSectorClicked);
-});
+arenaElem.addEventListener("click", onSeatSelect);
+renderArena();
