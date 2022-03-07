@@ -38,10 +38,10 @@ btnAttach.addEventListener("click", () => {
 
 const btnRemove = document.querySelector(".remove-handlers-btn");
 btnRemove.addEventListener("click", () => {
-  divElem.removeEventListener("click", logGreyDiv);
+  divElem.removeEventListener("click", logGreyDiv, true);
   divElem.removeEventListener("click", logGreenDiv);
 
-  pElem.removeEventListener("click", logGreyP);
+  pElem.removeEventListener("click", logGreyP, true);
   pElem.removeEventListener("click", logGreenP);
 
   spanElem.removeEventListener("click", logGreySpan, true);
