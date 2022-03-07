@@ -16,7 +16,7 @@ const logGreyP = logTarget.bind(null, "P", "grey");
 const logGreySpan = logTarget.bind(null, "SPAN", "grey");
 
 const clearEventsList = () => {
-  const eventsListElem = document.querySelectorAll(".events-list");
+  const eventsListElem = document.querySelector(".events-list");
   eventsListElem.innerHTML = "";
   //eventsListElem.parentNode.removeChild(eventsListElem);
 };
