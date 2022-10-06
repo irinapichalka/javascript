@@ -1,61 +1,61 @@
-const divElem = document.querySelector(".rect_div");
-const pElem = document.querySelector(".rect_p");
-const spanElem = document.querySelector(".rect_span");
+const tasks = [
+  { id: "1", text: "Buy milk", done: false },
+  { id: "2", text: "Pick up Tom from airport", done: false },
+  { id: "3", text: "Visit party", done: false },
+  { id: "4", text: "Visit doctor", done: true },
+  { id: "5", text: "Buy meat", done: true },
+];
 
-const logTarget = (text, color) => {
-  const eventsListElem = document.querySelector(".events-list");
-  eventsListElem.innerHTML += `<span style="color: ${color}; margin-left: 8px;">${text}</span>`;
+const listElem = document.querySelector(".list");
+
+const renderTasks = (tasksList) => {
+  const tasksElems = tasksList
+    .sort((a, b) => a.done - b.done)
+    .map(({ id, text, done }) => {
+      const listItemElem = document.createElement("li");
+      listItemElem.classList.add("list__item");
+      const checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      checkbox.checked = done;
+      checkbox.dataset.id = id;
+      checkbox.classList.add("list__item-checkbox");
+      if (done) {
+        listItemElem.classList.add("list__item_done");
+      }
+      listItemElem.append(checkbox, text);
+
+      return listItemElem;
+    });
+
+  listElem.append(...tasksElems);
 };
 
-const logGreenDiv = logTarget.bind(null, "DIV", "green");
-const logGreenP = logTarget.bind(null, "P", "green");
-const logGreenSpan = logTarget.bind(null, "SPAN", "green");
+renderTasks(tasks);
 
-const logGreyDiv = logTarget.bind(null, "DIV", "grey");
-const logGreyP = logTarget.bind(null, "P", "grey");
-const logGreySpan = logTarget.bind(null, "SPAN", "grey");
-
-const clearEventsList = () => {
-  const eventsListElem = document.querySelector(".events-list");
-  eventsListElem.innerHTML = "";
-  //eventsListElem.parentNode.removeChild(eventsListElem);
+const inputElem = document.querySelector(".task-input");
+const btnCreateElem = document.querySelector(".create-task-btn");
+const checkboxElems = document.querySelectorAll(".list__item-checkbox");
+const onChangeCheckbox = (event) => {
+  const changedTask = tasks.find((obj) => obj.id === event.target.dataset.id);
+  if (changedTask.done) changedTask.done = false;
+  else changedTask.done = true;
+  listElem.innerHTML = "";
+  console.log(event.target.dataset.id);
+  renderTasks(tasks);
 };
-
-const btnClear = document.querySelector(".clear-btn");
-btnClear.addEventListener("click", clearEventsList);
-
-const btnAttach = document.querySelector(".attach-handlers-btn");
-btnAttach.addEventListener("click", () => {
-  divElem.addEventListener("click", logGreyDiv, true);
-  divElem.addEventListener("click", logGreenDiv);
-
-  pElem.addEventListener("click", logGreyP, true);
-  pElem.addEventListener("click", logGreenP);
-
-  spanElem.addEventListener("click", logGreySpan, true);
-  spanElem.addEventListener("click", logGreenSpan);
-});
-
-const btnRemove = document.querySelector(".remove-handlers-btn");
-btnRemove.addEventListener("click", () => {
-  divElem.removeEventListener("click", logGreyDiv, true);
-  divElem.removeEventListener("click", logGreenDiv);
-
-  pElem.removeEventListener("click", logGreyP, true);
-  pElem.removeEventListener("click", logGreenP);
-
-  spanElem.removeEventListener("click", logGreySpan, true);
-  spanElem.removeEventListener("click", logGreenSpan);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  //btnAttach.onClick();
-  divElem.addEventListener("click", logGreyDiv, true);
-  divElem.addEventListener("click", logGreenDiv);
-
-  pElem.addEventListener("click", logGreyP, true);
-  pElem.addEventListener("click", logGreenP);
-
-  spanElem.addEventListener("click", logGreySpan, true);
-  spanElem.addEventListener("click", logGreenSpan);
-});
+const onCreateTask = () => {
+  if (!inputElem.value) return;
+  const newTask = {};
+  newTask.id = String(Math.floor(Math.random() * 1000));
+  newTask.text = inputElem.value;
+  newTask.done = false;
+  tasks.unshift(newTask);
+  listElem.innerHTML = "";
+  inputElem.value = "";
+  renderTasks(tasks);
+  console.log(tasks);
+};
+btnCreateElem.addEventListener("click", onCreateTask);
+/*[...checkboxElems].forEach((checkbox) =>
+  checkbox.addEventListener("change", onChangeCheckbox));*/
+listElem.addEventListener("click", onChangeCheckbox);
