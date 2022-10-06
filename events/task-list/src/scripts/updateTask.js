@@ -1,5 +1,6 @@
 import { renderTasks } from "./render.js";
 import { getItem, setItem } from "./storage.js";
+
 export const onToggleTask = (e) => {
   const isCheckbox = e.target.classList.contains("list__item-checkbox");
 
@@ -16,8 +17,10 @@ export const onToggleTask = (e) => {
         finishDate: done ? new Date().toISOString() : null,
       };
     }
+    console.log(task);
     return task;
   });
+
   setItem("tasksList", newTasksList);
   renderTasks();
 };
