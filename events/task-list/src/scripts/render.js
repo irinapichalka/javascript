@@ -20,14 +20,18 @@ const createListItem = ({ id, text, done }) => {
     listItemElem.classList.add("list__item_done");
   }
   listItemElem.append(checkboxElem, text);
+
   return listItemElem;
 };
 
 export const renderTasks = () => {
   const tasksList = getItem("tasksList") || [];
+
   listElem.innerHTML = "";
   const tasksElems = tasksList
-    .sort((a, b) => a.done - b.done)
+    .sort((a, b) => {
+      return new Date(b.createDate) - new Date(a.createDate);
+    })
     .map(createListItem);
 
   listElem.append(...tasksElems);
