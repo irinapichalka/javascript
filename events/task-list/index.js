@@ -34,30 +34,29 @@ renderTasks(tasks);
 
 const inputElem = document.querySelector(".task-input");
 const btnCreateElem = document.querySelector(".create-task-btn");
-
+const checkboxElems = document.querySelectorAll(".list__item-checkbox");
+const onChangeCheckbox = (event) => {
+  const changedTask = tasks.find((obj) => obj.id === event.target.dataset.id);
+  if (changedTask.done) changedTask.done = false;
+  else changedTask.done = true;
+  listElem.innerHTML = "";
+  console.log(event.target.dataset.id);
+  renderTasks(tasks);
+};
 const onCreateTask = () => {
   if (!inputElem.value) return;
   const newTask = {};
-  newTask.id = Math.floor(Math.random() * 1000);
+  newTask.id = String(Math.floor(Math.random() * 1000));
   newTask.text = inputElem.value;
   newTask.done = false;
   tasks.unshift(newTask);
   listElem.innerHTML = "";
   inputElem.value = "";
   renderTasks(tasks);
+  console.log(tasks);
 };
 btnCreateElem.addEventListener("click", onCreateTask);
-
-const checkboxElems = document.querySelectorAll(".list__item-checkbox");
-const onChangeCheckbox = (event) => {
-  tasks.map((obj) => {
-    if (obj.id === event.target.dataset.id) {
-      obj.done = true;
-    }
-  });
-  listElem.innerHTML = "";
-  renderTasks(tasks);
-};
 [...checkboxElems].forEach((checkbox) =>
   checkbox.addEventListener("change", onChangeCheckbox)
 );
+//listElem.addEventListener("click", onChangeCheckbox);
