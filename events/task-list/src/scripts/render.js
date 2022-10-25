@@ -33,11 +33,11 @@ const createListItem = ({ text, done, id }) => {
   }
 
   const textElem = document.createElement("span");
-  textElem.classList.add(".list-item__text");
+  textElem.classList.add("list-item__text");
   textElem.textContent = text;
 
   const deleteBtnElem = document.createElement("button");
-  deleteBtnElem.classList.add(".list-item__delete-btn");
+  deleteBtnElem.classList.add("list-item__delete-btn");
 
   listItemElem.append(checkboxElem, textElem, deleteBtnElem);
 

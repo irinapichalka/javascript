@@ -15,6 +15,11 @@ export const createTask = (taskData) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    },
+    httpNodeCors: {
+      origin: "*",
+      methods: "GET,PUT,POST,DELETE",
     },
     body: JSON.stringify(taskData),
   });
@@ -25,6 +30,11 @@ export const updateTask = (taskId, updatedTaskData) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    },
+    httpNodeCors: {
+      origin: "*",
+      methods: "GET,PUT,POST,DELETE",
     },
     body: JSON.stringify(updatedTaskData),
   });
