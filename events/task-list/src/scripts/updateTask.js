@@ -12,7 +12,9 @@ export const onToggleTask = (e) => {
   const taskId = e.target.dataset.id;
 
   const tasksList = getItem("tasksList");
-  const { text, createDate } = tasksList.find((task) => task.id === taskId);
+  const { text, createDate, done } = tasksList.find(
+    (task) => task.id === taskId
+  );
 
   const updatedTask = {
     text,
