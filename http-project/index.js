@@ -21,7 +21,6 @@ function createUser(userData) {
 
 function onSubmitData(e) {
   const formData = Object.fromEntries(new FormData(formElem));
-  console.log(JSON.stringify(formData));
   createUser(formData)
     .then((response) => response.json())
     .then((data) => alert(JSON.stringify(data, null, 4)))
