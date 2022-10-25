@@ -18,9 +18,15 @@ function createUser(userData) {
     body: JSON.stringify(userData),
   });
 }
-function onSubmitData() {
+
+function onSubmitData(e) {
   const formData = Object.fromEntries(new FormData(formElem));
-  createUser(formData).then((data) => alert(JSON.stringify(data, null, 4)));
+  console.log(JSON.stringify(formData));
+  createUser(formData)
+    .then((response) => response.json())
+    .then((data) => alert(JSON.stringify(data, null, 4)))
+    .then(formElem.reset());
+  e.preventDefault();
 }
 
 formElem.addEventListener("input", onValideForm);
