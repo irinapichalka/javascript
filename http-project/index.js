@@ -24,7 +24,7 @@ function onSubmitData(e) {
   createUser(formData)
     .then((response) => response.json())
     .then((data) => alert(JSON.stringify(data)))
-    .then(formElem.reset());
+    .then(() => formElem.reset());
   e.preventDefault();
 }
 
