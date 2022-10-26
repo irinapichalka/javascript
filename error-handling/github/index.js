@@ -1,10 +1,11 @@
 const baseUrl = "https://api.github.com/users";
 const imgUrl = "https://avatars3.githubusercontent.com/u10001";
 
+const avatarElem = document.querySelector(".user__avatar");
+avatarElem.src = imgUrl;
+
 const btnElem = document.querySelector(".name-form__btn");
-const onError = () => {
-  alert("Failed to load data");
-};
+
 const onShowSpinner = () => {
   const spinnerElem = document.querySelector(".spinner");
   spinnerElem.classList.remove("spinner_hidden");
@@ -12,6 +13,11 @@ const onShowSpinner = () => {
 const onHideSpinner = () => {
   const spinnerElem = document.querySelector(".spinner");
   spinnerElem.classList.add("spinner_hidden");
+};
+
+const onError = () => {
+  alert("Failed to load data");
+  onHideSpinner();
 };
 
 const onShowReposData = (reposData) => {
@@ -32,7 +38,6 @@ const onShowRepos = (reposUrl) => {
 const onShowData = (userData) => {
   const { avatar_url, name, location, repos_url } = userData;
 
-  const avatarElem = document.querySelector(".user__avatar");
   avatarElem.src = avatar_url;
 
   const nameElem = document.querySelector(".user__name");
