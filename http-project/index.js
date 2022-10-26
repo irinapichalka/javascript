@@ -23,7 +23,7 @@ function onSubmitData(e) {
   const formData = Object.fromEntries(new FormData(formElem));
   createUser(formData)
     .then((response) => response.json())
-    .then((data) => alert(JSON.stringify(data, null, 4)))
+    .then((data) => alert(JSON.stringify(data)))
     .then(formElem.reset());
   e.preventDefault();
 }
