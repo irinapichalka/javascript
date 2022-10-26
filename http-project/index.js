@@ -23,8 +23,10 @@ function onSubmitData(e) {
   const formData = Object.fromEntries(new FormData(formElem));
   createUser(formData)
     .then((response) => response.json())
-    .then((data) => alert(JSON.stringify(data)))
-    .then(() => formElem.reset());
+    .then((data) => {
+    alert(JSON.stringify(data));
+    formElem.reset();         
+          });
   e.preventDefault();
 }
 
